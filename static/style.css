@@ -1,0 +1,179 @@
+/* ============
+   Dark Mode UI
+   Premium SaaS Style
+   Fully Responsive
+   ============ */
+
+:root {
+  --bg: #0b0f19;
+  --card: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.12);
+  --accent: #4f8bff;
+  --accent2: #7ac0ff;
+  --text: #e8ecf4;
+  --muted: #8f9bb5;
+  --danger: #ff5c5c;
+  --success: #5cffb0;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: linear-gradient(135deg, #0b0f19 20%, #111726 100%);
+  color: var(--text);
+  padding: 20px;
+}
+
+.container {
+  max-width: 980px;
+  margin: auto;
+}
+
+header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.card {
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-top: 18px;
+  box-shadow: var(--shadow);
+  transition: 0.3s;
+}
+
+.card:hover {
+  border-color: var(--accent);
+}
+
+label {
+  display: block;
+  margin: 14px 0 6px 0;
+  font-weight: 600;
+  color: var(--text);
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-size: 14px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.btn {
+  background: var(--accent);
+  color: white;
+  padding: 12px 18px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  box-shadow: 0 4px 14px rgba(79, 139, 255, 0.3);
+}
+
+.btn:hover {
+  background: var(--accent2);
+  box-shadow: 0 6px 20px rgba(79, 139, 255, 0.45);
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.btn.ghost:hover {
+  background: rgba(79, 139, 255, 0.1);
+}
+
+.required {
+  color: var(--danger);
+}
+
+.split {
+  display: flex;
+  gap: 18px;
+}
+
+.split > div {
+  flex: 1;
+}
+
+.pre {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  max-height: 280px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  color: var(--text);
+}
+
+.score {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--accent2);
+}
+
+.missing li {
+  color: var(--danger);
+  margin-bottom: 4px;
+}
+
+.good {
+  color: var(--success);
+}
+
+footer {
+  margin-top: 18px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .split {
+    flex-direction: column;
+  }
+}

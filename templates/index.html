@@ -1,0 +1,89 @@
+<!-- templates/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resume ATS Builder</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Resume ATS Builder</h1>
+      <p class="muted">Upload resume, paste job description and get an ATS score + tips. Generate resume as PDF / TXT.</p>
+    </header>
+
+    <section class="card">
+      <form action="/upload" method="post" enctype="multipart/form-data" id="analyzeForm">
+        <label>Upload Resume (PDF / DOCX / TXT)</label>
+        <input type="file" name="resume_file" accept=".pdf,.docx,.txt" required />
+
+        <label>Job Description (paste full JD) <span class="required">*</span></label>
+        <textarea name="job_description" rows="8" required placeholder="Paste the job description here..."></textarea>
+
+        <div class="row">
+          <button type="submit" class="btn">Analyze</button>
+          <button type="button" class="btn ghost" id="openGenerator">Open Resume Generator</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card" id="generator" style="display:none;">
+      <h2>Generate Resume</h2>
+      <form id="generateForm" action="/generate" method="post">
+        <div class="row">
+          <input name="name" placeholder="Full name" />
+          <input name="email" placeholder="Email" />
+        </div>
+        <div class="row">
+          <input name="phone" placeholder="Phone" />
+          <input name="education" placeholder="Education (short)" />
+        </div>
+        <label>Summary</label>
+        <textarea name="summary" rows="3" placeholder="Professional summary"></textarea>
+
+        <label>Experience (one per line)</label>
+        <textarea name="experience" rows="5" placeholder="Company - role - duration - description"></textarea>
+
+        <label>Skills (comma separated)</label>
+        <input name="skills" placeholder="Python, Flask, SQL, Docker" />
+
+        <label>Projects (one per line)</label>
+        <textarea name="projects" rows="4"></textarea>
+
+        <div class="row">
+          <button type="submit" class="btn">Download PDF</button>
+          <button type="button" class="btn ghost" id="downloadTxtBtn">Download TXT</button>
+        </div>
+      </form>
+    </section>
+
+    <footer class="muted small">Build By Nilesh</footer>
+  </div>
+
+<script>
+document.getElementById('openGenerator').addEventListener('click', function(){
+  const g = document.getElementById('generator');
+  g.style.display = g.style.display === 'none' ? 'block' : 'none';
+});
+
+document.getElementById('downloadTxtBtn').addEventListener('click', async function(){
+  const form = document.getElementById('generateForm');
+  const data = Object.fromEntries(new FormData(form));
+  const res = await fetch('/download_txt', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(data)
+  });
+  const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'generated_resume.txt';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!-- templates/result.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ATS Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>ATS Analysis Result</h1>
+      <p class="muted">Score & suggestions based on the Job Description you pasted.</p>
+    </header>
+
+    <section class="card">
+      <h2>ATS Score: <span class="score">{{ score }}</span>/100</h2>
+      <div class="split">
+        <div>
+          <h3>Job Description</h3>
+          <pre class="small pre">{{ job_description }}</pre>
+        </div>
+        <div>
+          <h3>Resume Extracted</h3>
+          <pre class="small pre">{{ resume_text }}</pre>
+        </div>
+      </div>
+
+      <h3>Details</h3>
+      <p>Total keywords found in JD: {{ details.total_keywords }}</p>
+      <p>Matched keywords ({{ details.matched_keywords|length }}): {{ details.matched_keywords|join(', ') }}</p>
+
+      <h3>Missing Important Keywords</h3>
+      {% if missing %}
+        <ul class="missing">
+          {% for k in missing %}
+            <li>{{ k }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="good">No critical keywords missing — good job.</p>
+      {% endif %}
+
+      <div class="row">
+        <a href="/" class="btn ghost">Analyze another</a>
+        <button onclick="window.print()" class="btn">Print Result</button>
+      </div>
+    </section>
+
+    <footer class="muted small">Stored snapshot saved to local SQLite database.</footer>
+  </div>
+</body>
+</html>
