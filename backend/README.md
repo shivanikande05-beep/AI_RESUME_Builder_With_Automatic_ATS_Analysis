@@ -1,8 +1,6 @@
-
-
-# 🚀 Resume ATS Analyzer + AI Resume Generator
-
+# AI_RESUME_Builder_With_Automatic_ATS_Analysis
 An advanced web application that analyzes resumes using a custom ATS engine and generates clean, professional PDF/TXT resumes — all without using any external APIs.
+## Author : https://www.linkedin.com/in/shivnanda-kande-382a22383/?utm_source=share_via&utm_content=profile&utm_medium=member_android
 
 This project is built using:
 🟦 **Python (Flask)**
